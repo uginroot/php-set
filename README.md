@@ -55,6 +55,9 @@ $animalsPets->setValues(Animals::Wolf, Animals::Lion);
 $animalsPets->getNames(); // ['Wolf', 'Lion']
 $animalsPets->setValues(new Animals(Animals::Dog, Animals::Cat));
 $animalsPets->getNames(); // ['Dog', 'Cat']
+
+$animalsPets->setNames('Wolf', 'Lion');
+$animalsPets->getNames(); // ['Wolf', 'Lion']
 ```
 
 # Exceptions

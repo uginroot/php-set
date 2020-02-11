@@ -117,6 +117,22 @@ abstract class SetAbstract implements SetInterface
     }
 
     /**
+     * @param $names
+     * @return Generator
+     */
+    private static function nameGenerator($names){
+        if(is_iterable($names)){
+            foreach ($names as $name){
+                foreach (static::nameGenerator($name) as $subName){
+                    yield $subName;
+                }
+            }
+        } else {
+            yield $names;
+        }
+    }
+
+    /**
      * SetAbstract constructor.
      * @param mixed ...$values
      */
@@ -155,6 +171,16 @@ abstract class SetAbstract implements SetInterface
         foreach (static::valueExtractor($values) as $value) {
             $this->addValue($value);
         }
+        return $this;
+    }
+
+    final public function setNames(...$names): self
+    {
+        $this->values = [];
+        foreach (static::nameGenerator($names) as $name){
+            $this->addValueByName($name);
+        }
+
         return $this;
     }
 

@@ -262,4 +262,11 @@ class SetTest extends TestCase
         $this->assertFalse($animalsPets->equal($animalsCat));
         $this->assertFalse($animalsPets->equal($animalsDog));
     }
+
+    public function testSetNames()
+    {
+        $animalsPets = new Animal(Animal::Lion);
+        $animalsPets->setNames('Cat', 'Dog');
+        $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animalsPets->getValues());
+    }
 }

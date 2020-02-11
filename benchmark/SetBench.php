@@ -131,4 +131,8 @@ class SetBench
         $this->animalFull->is(Animal::Dog, Animal::Cat, Animal::Wolf, Animal::Lion);
         $this->animalFull->is(Animal::Dog, Animal::Cat);
     }
+
+    public function benchSetNames(){
+        $this->animalFull->setNames(...$this->animalNames);
+    }
 }
