@@ -4,8 +4,6 @@
 namespace Uginroot\PhpSet\Traits;
 
 
-use Uginroot\PhpSet\SetAbstract;
-
 trait ObjectTrait
 {
     use GeneratorTrait;
@@ -25,16 +23,6 @@ trait ObjectTrait
         /** @noinspection PhpParamsInspection */
         static::addObjectNames($self, $names);
         return $self;
-    }
-
-    /**
-     * SetAbstract constructor.
-     * @param mixed ...$values
-     */
-    final public function __construct(...$values)
-    {
-        /** @noinspection PhpParamsInspection */
-        static::addObjectValues($this, $values);
     }
 
     /**
