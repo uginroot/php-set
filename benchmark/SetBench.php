@@ -45,14 +45,14 @@ class SetBench
     public function benchGetValueName()
     {
         foreach ($this->animalValues as $value) {
-            Animal::getValueName($value);
+            Animal::getName($value);
         }
     }
 
     public function benchGetNameValue()
     {
         foreach ($this->animalNames as $name) {
-            Animal::getNameValue($name);
+            Animal::getValue($name);
         }
     }
 
@@ -73,30 +73,27 @@ class SetBench
 
     public function benchAddValue()
     {
-        foreach ($this->animalValues as $value) {
-            $this->animalEmpty->addValue($value);
-        }
+        $this->animalEmpty->addValues($this->animalValues);
+        $this->animalEmpty->removeValues($this->animalValues);
     }
 
     public function benchAddValueByName()
     {
-        foreach ($this->animalNames as $name) {
-            $this->animalEmpty->addValueByName($name);
-        }
+        $this->animalEmpty->addNames($this->animalNames);
+        $this->animalEmpty->removeNames($this->animalNames);
     }
 
     public function benchRemoveValue()
     {
-        foreach ($this->animalValues as $value) {
-            $this->animalFull->removeValue($value);
-        }
+        $this->animalFull->removeValues($this->animalValues);
+        $this->animalFull->addValues($this->animalValues);
+
     }
 
     public function benchRemoveValueByName()
     {
-        foreach ($this->animalNames as $name) {
-            $this->animalFull->addValueByName($name);
-        }
+        $this->animalFull->addNames($this->animalNames);
+        $this->animalFull->removeNames($this->animalNames);
     }
 
     public function benchSetValues()

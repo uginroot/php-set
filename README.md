@@ -36,8 +36,8 @@ $animalsPets->equal(Animals::Dog, Animals::Cat, Animals::Lion); // false
 // Static methods
 Animals::getNameVariants(); // ['Dog', 'Cat', 'Wolf', 'Lion']
 Animals::getValueVariants(); // [1, 2, 3, 4]
-Animals::getValueName(Animals::Dog); // 'Dog'
-Animals::getNameValue('Dog'); // Animal::Dog (1)
+Animals::getName(Animals::Dog); // 'Dog'
+Animals::getValue('Dog'); // Animal::Dog (1)
 
 // Public methods
 $animalsPets->getValues(); // [1, 2]
@@ -86,10 +86,10 @@ class Animals extends SetAbstract{
 }
 $animals = new Animals(Animals::Dog, Animals::Cat);
 
-try{ Animals::getValueName(3);         } catch (IncorrectValueException $e){}
+try{ Animals::getName(3);         } catch (IncorrectValueException $e){}
 try{ $animals->addValue(3);            } catch (IncorrectValueException $e){}
 
-try{ Animals::getNameValue('Wolf');    } catch (IncorrectNameException $e){}
+try{ Animals::getValue('Wolf');    } catch (IncorrectNameException $e){}
 try{ $animals->addValueByName('Wolf'); } catch (IncorrectNameException $e){}
 
 
@@ -100,8 +100,8 @@ class Buttons extends SetAbstract{
 }
 try{ Buttons::getNameVariants();             } catch (DuplicateValueException $e){}
 try{ Buttons::getValueVariants();            } catch (DuplicateValueException $e){}
-try{ Buttons::getValueName(Buttons::Cancel); } catch (DuplicateValueException $e){}
-try{ Buttons::getNameValue('Dog');           } catch (DuplicateValueException $e){}
+try{ Buttons::getName(Buttons::Cancel); } catch (DuplicateValueException $e){}
+try{ Buttons::getValue('Dog');           } catch (DuplicateValueException $e){}
 try{ new Buttons();                          } catch (DuplicateValueException $e){}
 
 

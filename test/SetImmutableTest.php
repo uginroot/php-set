@@ -23,12 +23,12 @@ class SetImmutableTest extends TestCase
 
     public function testGetValueName()
     {
-        $this->assertSame('Center', Align::getValueName(Align::Center));
+        $this->assertSame('Center', Align::getName(Align::Center));
     }
 
     public function testGetNameValue()
     {
-        $this->assertSame('center', Align::getNameValue('Center'));
+        $this->assertSame('center', Align::getValue('Center'));
     }
 
     public function testGetNames()
@@ -68,10 +68,10 @@ class SetImmutableTest extends TestCase
         $this->assertEqualsCanonicalizing(['Right', 'Left'], $align->getNames());
     }
 
-    public function testAddValue()
+    public function testAddValues()
     {
         $align = new Align;
-        $newAlign = $align->addValue(Align::Center);
+        $newAlign = $align->addValues(Align::Center);
 
         $this->assertEqualsCanonicalizing([Align::Center], $newAlign->getValues());
         $this->assertEqualsCanonicalizing(['Center'], $newAlign->getNames());
@@ -80,10 +80,10 @@ class SetImmutableTest extends TestCase
         $this->assertEqualsCanonicalizing([], $align->getNames());
     }
 
-    public function testRemoveValue()
+    public function testRemoveValues()
     {
         $align = new Align(Align::Left, Align::Center);
-        $newAlign = $align->removeValue(Align::Center);
+        $newAlign = $align->removeValues(Align::Center);
 
         $this->assertEqualsCanonicalizing([Align::Left], $newAlign->getValues());
         $this->assertEqualsCanonicalizing(['Left'], $newAlign->getNames());
@@ -104,10 +104,10 @@ class SetImmutableTest extends TestCase
         $this->assertEqualsCanonicalizing([], $align->getNames());
     }
 
-    public function testAddValueByName()
+    public function testAddNames()
     {
         $align = new Align;
-        $newAlign = $align->addValueByName('Center');
+        $newAlign = $align->addNames('Center');
 
         $this->assertEqualsCanonicalizing([Align::Center], $newAlign->getValues());
         $this->assertEqualsCanonicalizing(['Center'], $newAlign->getNames());
@@ -116,10 +116,10 @@ class SetImmutableTest extends TestCase
         $this->assertEqualsCanonicalizing([], $align->getNames());
     }
 
-    public function testRemoveValueByName()
+    public function testRemoveNames()
     {
         $align = new Align(Align::Left, Align::Center);
-        $newAlign = $align->removeValueByName('Center');
+        $newAlign = $align->removeNames('Center');
 
         $this->assertEqualsCanonicalizing([Align::Left], $newAlign->getValues());
         $this->assertEqualsCanonicalizing(['Left'], $newAlign->getNames());

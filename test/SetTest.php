@@ -23,12 +23,12 @@ class SetTest extends TestCase
 
     public function testGetValueName()
     {
-        $this->assertSame('Center', Align::getValueName(Align::Center));
+        $this->assertSame('Center', Align::getName(Align::Center));
     }
 
     public function testGetNameValue()
     {
-        $this->assertSame('center', Align::getNameValue('Center'));
+        $this->assertSame('center', Align::getValue('Center'));
     }
 
     public function testGetNames()
@@ -68,19 +68,28 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing(['Right', 'Left'], $align->getNames());
     }
 
-    public function testAddValue()
+    public function testAddValues()
     {
         $align = new Align;
-        $align->addValue(Align::Center);
+        $align->addValues(Align::Center);
 
         $this->assertEqualsCanonicalizing([Align::Center], $align->getValues());
         $this->assertEqualsCanonicalizing(['Center'], $align->getNames());
     }
 
-    public function testRemoveValue()
+    public function testAddNames()
+    {
+        $align = new Align;
+        $align->addNames('Center');
+
+        $this->assertEqualsCanonicalizing([Align::Center], $align->getValues());
+        $this->assertEqualsCanonicalizing(['Center'], $align->getNames());
+    }
+
+    public function testRemoveValues()
     {
         $align = new Align(Align::Left, Align::Center);
-        $align->removeValue(Align::Center);
+        $align->removeValues(Align::Center);
 
         $this->assertEqualsCanonicalizing([Align::Left], $align->getValues());
         $this->assertEqualsCanonicalizing(['Left'], $align->getNames());
@@ -95,19 +104,10 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing(['Left', 'Right', 'Center'], $align->getNames());
     }
 
-    public function testAddValueByName()
-    {
-        $align = new Align;
-        $align->addValueByName('Center');
-
-        $this->assertEqualsCanonicalizing([Align::Center], $align->getValues());
-        $this->assertEqualsCanonicalizing(['Center'], $align->getNames());
-    }
-
-    public function testRemoveValueByName()
+    public function testRemoveNames()
     {
         $align = new Align(Align::Left, Align::Center);
-        $align->removeValueByName('Center');
+        $align->removeNames('Center');
 
         $this->assertEqualsCanonicalizing([Align::Left], $align->getValues());
         $this->assertEqualsCanonicalizing(['Left'], $align->getNames());

@@ -45,30 +45,6 @@ interface SetInterface
     public function equal(...$values):bool;
 
     /**
-     * @param mixed $value
-     * @return $this
-     */
-    public function addValue($value):self;
-
-    /**
-     * @param mixed $value
-     * @return $this
-     */
-    public function removeValue($value):self;
-
-    /**
-     * @param string $name
-     * @return $this
-     */
-    public function addValueByName(string $name):self;
-
-    /**
-     * @param string $name
-     * @return $this
-     */
-    public function removeValueByName(string $name):self;
-
-    /**
      * @return array|mixed[]
      */
     public function getValues():array;
@@ -85,8 +61,32 @@ interface SetInterface
     public function setValues(...$values):self;
 
     /**
-     * @param mixed ...$names
+     * @param string ...$names
      * @return $this
      */
     public function setNames(...$names):self;
+
+    /**
+     * @param mixed ...$values
+     * @return $this
+     */
+    public function addValues(...$values):self;
+
+    /**
+     * @param string ...$names
+     * @return $this
+     */
+    public function addNames(...$names):self;
+
+    /**
+     * @param mixed ...$values
+     * @return $this
+     */
+    public function removeValues(...$values):self;
+
+    /**
+     * @param string ...$names
+     * @return $this
+     */
+    public function removeNames(...$names):self;
 }

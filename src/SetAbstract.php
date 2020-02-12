@@ -3,6 +3,8 @@
 
 namespace Uginroot\PhpSet;
 
+use Uginroot\PhpSet\Traits\SetTrait;
+
 abstract class SetAbstract implements SetInterface
 {
     use SetTrait;
@@ -13,27 +15,7 @@ abstract class SetAbstract implements SetInterface
      */
     final public function __construct(...$values)
     {
-        $this->setValues(...$values);
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    final public function addValue($value): self
-    {
-        static::addObjectValue($this, $value);
-        return $this;
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    final public function removeValue($value): self
-    {
-        static::removeObjectValue($this, $value);
-        return $this;
+        static::addObjectValues($this, $values);
     }
 
     /**
@@ -42,37 +24,59 @@ abstract class SetAbstract implements SetInterface
      */
     final public function setValues(...$values): self
     {
-        static::setObjectValues($this, ...$values);
+        static::setObjectValues($this, $values);
         return $this;
     }
 
     /**
-     * @param mixed ...$names
+     * @param string ...$names
      * @return $this
      */
     final public function setNames(...$names): self
     {
-        static::setObjectNames($this, ...$names);
+        static::setObjectNames($this, $names);
         return $this;
     }
 
     /**
-     * @param string $name
+     * @param mixed ...$values
      * @return $this
      */
-    final public function addValueByName(string $name): self
+    public function addValues(...$values): self
     {
-        static::addObjectValueByName($this, $name);
+        static::addObjectValues($this, $values);
         return $this;
     }
 
     /**
-     * @param string $name
+     * @param string ...$names
      * @return $this
      */
-    final public function removeValueByName(string $name): self
+    public function addNames(...$names): self
     {
-        static::removeObjectValueByName($this, $name);
+        static::addObjectNames($this, $names);
         return $this;
     }
+
+    /**
+     * @param mixed ...$values
+     * @return $this
+     */
+    public function removeValues(...$values): self
+    {
+        static::removeObjectValues($this, $values);
+        return $this;
+    }
+
+    /**
+     * @param string ...$names
+     * @return $this
+     */
+    public function removeNames(...$names): self
+    {
+        static::removeObjectNames($this, $names);
+        return $this;
+    }
+
+
 }

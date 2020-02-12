@@ -2,6 +2,8 @@
 
 namespace Uginroot\PhpSet;
 
+use Uginroot\PhpSet\Traits\SetTrait;
+
 abstract class SetImmutableAbstract implements SetImmutableInterface
 {
     use SetTrait;
@@ -12,51 +14,7 @@ abstract class SetImmutableAbstract implements SetImmutableInterface
      */
     public function __construct(...$values)
     {
-        static::setObjectValues($this, ...$values);
-    }
-
-    /**
-     * @param mixed $value
-     * @return $this
-     */
-    final public function addValue($value):self
-    {
-        $self = clone $this;
-        static::addObjectValue($self, $value);
-        return $self;
-    }
-
-    /**
-     * @param mixed $value
-     * @return $this
-     */
-    final public function removeValue($value):self
-    {
-        $self = clone $this;
-        static::removeObjectValue($self, $value);
-        return $self;
-    }
-
-    /**
-     * @param string $name
-     * @return $this
-     */
-    final public function addValueByName(string $name):self
-    {
-        $self = clone $this;
-        static::addObjectValueByName($self, $name);
-        return $self;
-    }
-
-    /**
-     * @param string $name
-     * @return $this
-     */
-    final public function removeValueByName(string $name):self
-    {
-        $self = clone $this;
-        static::removeObjectValueByName($self, $name);
-        return $self;
+        static::addObjectValues($this, $values);
     }
 
     /**
@@ -66,18 +24,62 @@ abstract class SetImmutableAbstract implements SetImmutableInterface
     final public function setValues(...$values):self
     {
         $self = clone $this;
-        static::setObjectValues($self, ...$values);
+        static::setObjectValues($self, $values);
         return $self;
     }
 
     /**
-     * @param mixed ...$names
+     * @param string ...$names
      * @return $this
      */
     final public function setNames(...$names):self
     {
         $self = clone $this;
-        static::setObjectNames($self, ...$names);
+        static::setObjectNames($self, $names);
+        return $self;
+    }
+
+    /**
+     * @param mixed ...$values
+     * @return SetInterface
+     */
+    public function addValues(...$values):SetInterface
+    {
+        $self = clone $this;
+        static::addObjectValues($self, $values);
+        return $self;
+    }
+
+    /**
+     * @param string ...$names
+     * @return SetInterface
+     */
+    public function addNames(...$names):SetInterface
+    {
+        $self = clone $this;
+        static::addObjectNames($self, $names);
+        return $self;
+    }
+
+    /**
+     * @param mixed ...$values
+     * @return SetInterface
+     */
+    public function removeValues(...$values):SetInterface
+    {
+        $self = clone $this;
+        static::removeObjectValues($self, $values);
+        return $self;
+    }
+
+    /**
+     * @param string ...$names
+     * @return SetInterface
+     */
+    public function removeNames(...$names):SetInterface
+    {
+        $self = clone $this;
+        static::removeObjectNames($self, $names);
         return $self;
     }
 }
