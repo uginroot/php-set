@@ -132,4 +132,9 @@ class SetBench
     public function benchSetNames(){
         $this->animalFull->setNames(...$this->animalNames);
     }
+
+    public function benchCreateFromNames()
+    {
+        Animal::createFromNames('Cat', 'Dog');
+    }
 }

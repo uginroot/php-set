@@ -4,9 +4,23 @@
 namespace Uginroot\PhpSet\Traits;
 
 
+use Uginroot\PhpSet\SetAbstract;
+
 trait ObjectTrait
 {
     use GeneratorTrait;
+
+    /**
+     * @param mixed ...$names
+     * @return $this
+     */
+    public static function createFromNames(...$names): self
+    {
+        $self = new static();
+        /** @noinspection PhpParamsInspection */
+        static::addObjectNames($self, $names);
+        return $self;
+    }
 
     /**
      * @var mixed[] Values current Set object

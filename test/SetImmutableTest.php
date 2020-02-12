@@ -286,4 +286,10 @@ class SetImmutableTest extends TestCase
         $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $newAnimalsPets->getValues());
         $this->assertEqualsCanonicalizing([Animal::Lion], $animalsPets->getValues());
     }
+
+    public function testCreateFromName()
+    {
+        $animals = Animal::createFromNames('Cat', 'Dog');
+        $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animals->getValues());
+    }
 }

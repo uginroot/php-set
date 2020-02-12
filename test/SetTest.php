@@ -269,4 +269,10 @@ class SetTest extends TestCase
         $animalsPets->setNames('Cat', 'Dog');
         $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animalsPets->getValues());
     }
+
+    public function testCreateFromName()
+    {
+        $animals = Animal::createFromNames('Cat', 'Dog');
+        $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animals->getValues());
+    }
 }
