@@ -9,15 +9,6 @@ abstract class SetImmutableAbstract implements SetImmutableInterface
     use SetTrait;
 
     /**
-     * SetImmutableAbstract constructor.
-     * @param mixed ...$values
-     */
-    public function __construct(...$values)
-    {
-        static::addObjectValues($this, $values);
-    }
-
-    /**
      * @param mixed ...$values
      * @return $this
      */

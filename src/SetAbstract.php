@@ -9,14 +9,6 @@ abstract class SetAbstract implements SetInterface
 {
     use SetTrait;
 
-    /**
-     * SetAbstract constructor.
-     * @param mixed ...$values
-     */
-    final public function __construct(...$values)
-    {
-        static::addObjectValues($this, $values);
-    }
 
     /**
      * @param mixed ...$values

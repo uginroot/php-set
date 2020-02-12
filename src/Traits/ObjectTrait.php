@@ -11,6 +11,11 @@ trait ObjectTrait
     use GeneratorTrait;
 
     /**
+     * @var mixed[] Values current Set object
+     */
+    private array $values = [];
+
+    /**
      * @param mixed ...$names
      * @return $this
      */
@@ -23,9 +28,14 @@ trait ObjectTrait
     }
 
     /**
-     * @var mixed[] Values current Set object
+     * SetAbstract constructor.
+     * @param mixed ...$values
      */
-    private array $values = [];
+    final public function __construct(...$values)
+    {
+        /** @noinspection PhpParamsInspection */
+        static::addObjectValues($this, $values);
+    }
 
     /**
      * @return array|string[]
