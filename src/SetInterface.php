@@ -5,6 +5,12 @@ namespace Uginroot\PhpSet;
 interface SetInterface
 {
     /**
+     * SetInterface constructor.
+     * @param mixed ...$values
+     */
+    public function __construct(...$values);
+
+    /**
      * @return array|string[]
      */
     public static function getNameVariants():array;
@@ -15,18 +21,24 @@ interface SetInterface
     public static function getValueVariants():array;
 
     /**
+     * Checks if all values are in the object
+     *
      * @param mixed ...$values
      * @return bool
      */
     public function is(...$values):bool;
 
     /**
+     * Checks if there is at least one value in the current object
+     *
      * @param mixed ...$values
      * @return bool
      */
     public function in(...$values):bool;
 
     /**
+     * Checks if all values match the passed
+     *
      * @param mixed ...$values
      * @return bool
      */
@@ -65,4 +77,16 @@ interface SetInterface
      * @return array|string[]
      */
     public function getNames():array;
+
+    /**
+     * @param mixed ...$values
+     * @return $this
+     */
+    public function setValues(...$values):self;
+
+    /**
+     * @param mixed ...$names
+     * @return $this
+     */
+    public function setNames(...$names):self;
 }
