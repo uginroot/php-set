@@ -22,6 +22,7 @@ Animals::getName(Animals::Dog); // 'Dog'
 Animals::getValue('Dog');       // 1
 
 $animalsPets = new Animals(Animals::Dog, Animals::Cat);
+$animalsPets = Animals::createFromNames('Dog', 'Cat');
 
 // Compare
 $animalsPets->in(Animals::Dog);                  // true
