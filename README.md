@@ -5,7 +5,8 @@ composer require uginroot/php-set:^1.0
 
 # Usage
 ```php
-use Uginroot\PhpSet\SetAbstract;use Uginroot\PhpSet\SetImmutableAbstract;
+use Uginroot\PhpSet\SetAbstract;
+use Uginroot\PhpSet\SetImmutableAbstract;
 
 class Animals extends SetAbstract{
     const Dog = 1;
@@ -14,50 +15,38 @@ class Animals extends SetAbstract{
     const Lion = 4;
 }
 
+// Static methods
+Animals::getNameVariants();     // ['Dog', 'Cat', 'Wolf', 'Lion']
+Animals::getValueVariants();    // [1, 2, 3, 4]
+Animals::getName(Animals::Dog); // 'Dog'
+Animals::getValue('Dog');       // 1
+
 $animalsPets = new Animals(Animals::Dog, Animals::Cat);
 
 // Compare
-$animalsPets->in(Animals::Dog); // true
-$animalsPets->is(Animals::Dog); // true
+$animalsPets->in(Animals::Dog);                  // true
+$animalsPets->in(Animals::Dog, Animals::Wolf);   // true
 
-$animalsPets->in(Animals::Dog, Animals::Wolf); // true
-$animalsPets->is(Animals::Dog, Animals::Wolf); // false
+$animalsPets->is(Animals::Dog);                  // true
+$animalsPets->is(Animals::Dog, Animals::Wolf);   // false
 
 $animalsPets->equal(Animals::Dog, Animals::Cat); // true
-$animalsPets->equal(Animals::Cat, Animals::Dog); // true
-$animalsPets->equal([Animals::Cat, Animals::Dog]); // true
-$animalsPets->equal(new Animals(Animals::Dog, Animals::Cat)); // true
-$animalsPets->equal(new Animals(Animals::Dog), new Animals(Animals::Cat)); // true
+$animalsPets->equal(Animals::Cat);               // false
 
-$animalsPets->equal(Animals::Cat); // false
-$animalsPets->equal(Animals::Dog); // false
-$animalsPets->equal(Animals::Dog, Animals::Cat, Animals::Lion); // false
-
-// Static methods
-Animals::getNameVariants(); // ['Dog', 'Cat', 'Wolf', 'Lion']
-Animals::getValueVariants(); // [1, 2, 3, 4]
-Animals::getName(Animals::Dog); // 'Dog'
-Animals::getValue('Dog'); // Animal::Dog (1)
-
-// Public methods
+// Current names|values
 $animalsPets->getValues(); // [1, 2]
-$animalsPets->getNames(); // ['Dog', 'Cat']
+$animalsPets->getNames();  // ['Dog', 'Cat']
 
+// Change
 $animalsPets->addValues(Animals::Wolf);
 $animalsPets->addNames('Lion');
-$animalsPets->getNames(); // ['Dog', 'Cat', 'Wolf', 'Lion']
 
 $animalsPets->removeValues(Animals::Wolf);
 $animalsPets->removeNames('Lion');
-$animalsPets->getNames(); // ['Dog', 'Cat']
 
 $animalsPets->setValues(Animals::Wolf, Animals::Lion);
-$animalsPets->getNames(); // ['Wolf', 'Lion']
-$animalsPets->setValues(new Animals(Animals::Dog, Animals::Cat));
-$animalsPets->getNames(); // ['Dog', 'Cat']
-
 $animalsPets->setNames('Wolf', 'Lion');
-$animalsPets->getNames(); // ['Wolf', 'Lion']
+
 
 class AnimalsImmutable extends SetImmutableAbstract{
     const Dog = 1;
