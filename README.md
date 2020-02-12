@@ -43,12 +43,12 @@ Animals::getValue('Dog'); // Animal::Dog (1)
 $animalsPets->getValues(); // [1, 2]
 $animalsPets->getNames(); // ['Dog', 'Cat']
 
-$animalsPets->addValue(Animals::Wolf);
-$animalsPets->addValueByName('Lion');
+$animalsPets->addValues(Animals::Wolf);
+$animalsPets->addNames('Lion');
 $animalsPets->getNames(); // ['Dog', 'Cat', 'Wolf', 'Lion']
 
-$animalsPets->removeValue(Animals::Wolf);
-$animalsPets->removeValueByName('Lion');
+$animalsPets->removeValues(Animals::Wolf);
+$animalsPets->removeNames('Lion');
 $animalsPets->getNames(); // ['Dog', 'Cat']
 
 $animalsPets->setValues(Animals::Wolf, Animals::Lion);
@@ -86,11 +86,11 @@ class Animals extends SetAbstract{
 }
 $animals = new Animals(Animals::Dog, Animals::Cat);
 
-try{ Animals::getName(3);         } catch (IncorrectValueException $e){}
-try{ $animals->addValue(3);            } catch (IncorrectValueException $e){}
+try{ Animals::getName(3);    } catch (IncorrectValueException $e){}
+try{ $animals->addValues(3); } catch (IncorrectValueException $e){}
 
-try{ Animals::getValue('Wolf');    } catch (IncorrectNameException $e){}
-try{ $animals->addValueByName('Wolf'); } catch (IncorrectNameException $e){}
+try{ Animals::getValue('Wolf');  } catch (IncorrectNameException $e){}
+try{ $animals->addNames('Wolf'); } catch (IncorrectNameException $e){}
 
 
 class Buttons extends SetAbstract{
@@ -98,11 +98,11 @@ class Buttons extends SetAbstract{
     const Accept = 1;
     const Reject = 1;
 }
-try{ Buttons::getNameVariants();             } catch (DuplicateValueException $e){}
-try{ Buttons::getValueVariants();            } catch (DuplicateValueException $e){}
+try{ Buttons::getNameVariants();        } catch (DuplicateValueException $e){}
+try{ Buttons::getValueVariants();       } catch (DuplicateValueException $e){}
 try{ Buttons::getName(Buttons::Cancel); } catch (DuplicateValueException $e){}
-try{ Buttons::getValue('Dog');           } catch (DuplicateValueException $e){}
-try{ new Buttons();                          } catch (DuplicateValueException $e){}
+try{ Buttons::getValue('Dog');          } catch (DuplicateValueException $e){}
+try{ new Buttons();                     } catch (DuplicateValueException $e){}
 
 
 ```
