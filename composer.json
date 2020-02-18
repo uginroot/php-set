@@ -11,7 +11,11 @@
   ],
   "autoload": {
     "psr-4": {
-      "Uginroot\\PhpSet\\": "./src",
+      "Uginroot\\PhpSet\\": "./src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "Uginroot\\PhpSet\\Test\\": "./test",
       "Uginroot\\PhpSet\\Benchmark\\": "./benchmark"
     }
