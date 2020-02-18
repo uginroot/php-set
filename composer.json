@@ -1,7 +1,6 @@
 {
   "name": "uginroot/php-set",
   "description": "Php set type",
-  "minimum-stability": "dev",
   "license": "MIT",
   "keywords": ["php", "type", "set"],
   "authors": [
