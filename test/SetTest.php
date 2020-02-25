@@ -71,46 +71,61 @@ class SetTest extends TestCase
     public function testAddValues()
     {
         $align = new Align;
-        $align->addValues(Align::Center);
+        $newAlign = $align->addValues(Align::Center);
 
-        $this->assertEqualsCanonicalizing([Align::Center], $align->getValues());
-        $this->assertEqualsCanonicalizing(['Center'], $align->getNames());
-    }
+        $this->assertEqualsCanonicalizing([Align::Center], $newAlign->getValues());
+        $this->assertEqualsCanonicalizing(['Center'], $newAlign->getNames());
 
-    public function testAddNames()
-    {
-        $align = new Align;
-        $align->addNames('Center');
-
-        $this->assertEqualsCanonicalizing([Align::Center], $align->getValues());
-        $this->assertEqualsCanonicalizing(['Center'], $align->getNames());
+        $this->assertEqualsCanonicalizing([], $align->getValues());
+        $this->assertEqualsCanonicalizing([], $align->getNames());
     }
 
     public function testRemoveValues()
     {
         $align = new Align(Align::Left, Align::Center);
-        $align->removeValues(Align::Center);
+        $newAlign = $align->removeValues(Align::Center);
 
-        $this->assertEqualsCanonicalizing([Align::Left], $align->getValues());
-        $this->assertEqualsCanonicalizing(['Left'], $align->getNames());
+        $this->assertEqualsCanonicalizing([Align::Left], $newAlign->getValues());
+        $this->assertEqualsCanonicalizing(['Left'], $newAlign->getNames());
+
+        $this->assertEqualsCanonicalizing([Align::Left, Align::Center], $align->getValues());
+        $this->assertEqualsCanonicalizing(['Left', 'Center'], $align->getNames());
     }
 
     public function testSetValues()
     {
         $align = new Align;
-        $align->setValues(Align::Left, Align::Right, Align::Center);
+        $newAlign = $align->setValues(Align::Left, Align::Right, Align::Center);
 
-        $this->assertEqualsCanonicalizing([Align::Left, Align::Right, Align::Center], $align->getValues());
-        $this->assertEqualsCanonicalizing(['Left', 'Right', 'Center'], $align->getNames());
+        $this->assertEqualsCanonicalizing([Align::Left, Align::Right, Align::Center], $newAlign->getValues());
+        $this->assertEqualsCanonicalizing(['Left', 'Right', 'Center'], $newAlign->getNames());
+
+        $this->assertEqualsCanonicalizing([], $align->getValues());
+        $this->assertEqualsCanonicalizing([], $align->getNames());
+    }
+
+    public function testAddNames()
+    {
+        $align = new Align;
+        $newAlign = $align->addNames('Center');
+
+        $this->assertEqualsCanonicalizing([Align::Center], $newAlign->getValues());
+        $this->assertEqualsCanonicalizing(['Center'], $newAlign->getNames());
+
+        $this->assertEqualsCanonicalizing([], $align->getValues());
+        $this->assertEqualsCanonicalizing([], $align->getNames());
     }
 
     public function testRemoveNames()
     {
         $align = new Align(Align::Left, Align::Center);
-        $align->removeNames('Center');
+        $newAlign = $align->removeNames('Center');
 
-        $this->assertEqualsCanonicalizing([Align::Left], $align->getValues());
-        $this->assertEqualsCanonicalizing(['Left'], $align->getNames());
+        $this->assertEqualsCanonicalizing([Align::Left], $newAlign->getValues());
+        $this->assertEqualsCanonicalizing(['Left'], $newAlign->getNames());
+
+        $this->assertEqualsCanonicalizing([Align::Left, Align::Center], $align->getValues());
+        $this->assertEqualsCanonicalizing(['Left', 'Center'], $align->getNames());
     }
 
     public function testIn()
@@ -266,8 +281,10 @@ class SetTest extends TestCase
     public function testSetNames()
     {
         $animalsPets = new Animal(Animal::Lion);
-        $animalsPets->setNames('Cat', 'Dog');
-        $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animalsPets->getValues());
+        $newAnimalsPets = $animalsPets->setNames('Cat', 'Dog');
+
+        $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $newAnimalsPets->getValues());
+        $this->assertEqualsCanonicalizing([Animal::Lion], $animalsPets->getValues());
     }
 
     public function testCreateFromName()

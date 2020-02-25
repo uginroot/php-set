@@ -6,7 +6,7 @@ interface SetInterface
 {
     /**
      * SetInterface constructor.
-     * @param mixed ...$values
+     * @param mixed[] ...$values
      */
     public function __construct(...$values);
 
@@ -31,7 +31,7 @@ interface SetInterface
     /**
      * Checks if there is at least one value in the current object
      *
-     * @param mixed ...$values
+     * @param mixed[] ...$values
      * @return bool
      */
     public function in(...$values):bool;
@@ -39,7 +39,7 @@ interface SetInterface
     /**
      * Checks if all values match the passed
      *
-     * @param mixed ...$values
+     * @param mixed[] ...$values
      * @return bool
      */
     public function equal(...$values):bool;
@@ -55,37 +55,37 @@ interface SetInterface
     public function getNames():array;
 
     /**
-     * @param mixed ...$values
+     * @param mixed[] ...$values
      * @return $this
      */
     public function setValues(...$values):self;
 
     /**
-     * @param string ...$names
+     * @param string[] ...$names
      * @return $this
      */
     public function setNames(...$names):self;
 
     /**
-     * @param mixed ...$values
+     * @param mixed[] ...$values
      * @return $this
      */
     public function addValues(...$values):self;
 
     /**
-     * @param string ...$names
+     * @param string[] ...$names
      * @return $this
      */
     public function addNames(...$names):self;
 
     /**
-     * @param mixed ...$values
+     * @param mixed[] ...$values
      * @return $this
      */
     public function removeValues(...$values):self;
 
     /**
-     * @param string ...$names
+     * @param string[] ...$names
      * @return $this
      */
     public function removeNames(...$names):self;

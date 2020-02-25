@@ -1,12 +1,11 @@
 # Install
 ```bash
-composer require uginroot/php-set:^1.0
+composer require uginroot/php-set:^2.0
 ```
 
 # Usage
 ```php
 use Uginroot\PhpSet\SetAbstract;
-use Uginroot\PhpSet\SetImmutableAbstract;
 
 class Animals extends SetAbstract{
     const Dog = 1;
@@ -38,7 +37,7 @@ $animalsPets->equal(Animals::Cat);               // false
 $animalsPets->getValues(); // [1, 2]
 $animalsPets->getNames();  // ['Dog', 'Cat']
 
-// Change
+// Create add return modified object
 $animalsPets->addValues(Animals::Wolf);
 $animalsPets->addNames('Lion');
 
@@ -47,19 +46,6 @@ $animalsPets->removeNames('Lion');
 
 $animalsPets->setValues(Animals::Wolf, Animals::Lion);
 $animalsPets->setNames('Wolf', 'Lion');
-
-
-class AnimalsImmutable extends SetImmutableAbstract{
-    const Dog = 1;
-    const Cat = 2;
-    const Wolf = 3;
-    const Lion = 4;
-}
-$animalsImmutablePets = new AnimalsImmutable(Animals::Dog, Animals::Cat);
-$animalsImmutableWild = $animalsImmutablePets->setValues(Animals::Wolf, Animals::Lion);
-
-$animalsImmutablePets->getNames(); // ['Dog', 'Cat']
-$animalsImmutableWild->getNames(); // ['Wolf', 'Lion']
 
 ```
 
