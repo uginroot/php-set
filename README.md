@@ -8,20 +8,27 @@ composer require uginroot/php-set:^2.0
 use Uginroot\PhpSet\SetAbstract;
 
 class Animals extends SetAbstract{
-    const Dog = 1;
-    const Cat = 2;
-    const Wolf = 3;
-    const Lion = 4;
+    protected const Other = 0; // Is not considered
+
+    public const Dog = 1;
+    public const Cat = 2;
+    public const Wolf = 3;
+    public const Lion = 4;
 }
 
 // Static methods
-Animals::getNameVariants();     // ['Dog', 'Cat', 'Wolf', 'Lion']
-Animals::getValueVariants();    // [1, 2, 3, 4]
-Animals::getName(Animals::Dog); // 'Dog'
-Animals::getValue('Dog');       // 1
+$choice = Animals::getChoice();
+$choice->getNames(); // ['Dog', 'Cat', 'Wolf', 'Lion']
+$choice->getValues(); // [1, 2, 3, 4]
+$choice->getName(1); // 'Dog'
+$choice->getValue('Dog'); // 1
+$choice->findNames(1, 3); // ['Dog', 'Wolf']
+$choice->findValues('Dog', 'Wolf'); // [1, 3]
+$choice->extractorValues(1, 3); // [1, 3]
+$choice->extractorNames('Dog', 'Wolf'); // ['Dog', 'Wolf']
 
 $animalsPets = new Animals(Animals::Dog, Animals::Cat);
-$animalsPets = Animals::createFromNames('Dog', 'Cat');
+$animalsPetsNames = Animals::createFromNames('Dog', 'Cat');
 
 // Compare
 $animalsPets->in(Animals::Dog);                  // true
@@ -32,6 +39,7 @@ $animalsPets->is(Animals::Dog, Animals::Wolf);   // false
 
 $animalsPets->equal(Animals::Dog, Animals::Cat); // true
 $animalsPets->equal(Animals::Cat);               // false
+$animalsPets->equal($animalsPetsNames);          // true
 
 // Current names|values
 $animalsPets->getValues(); // [1, 2]
@@ -57,30 +65,21 @@ use Uginroot\PhpSet\Exception\IncorrectValueException;
 use Uginroot\PhpSet\Exception\IncorrectNameException;
 
 class Animals extends SetAbstract{
-    const Dog = 1;
-    const Cat = 2;
+    public const Dog = 1;
+    public const Cat = 2;
 }
-$animals = new Animals(Animals::Dog, Animals::Cat);
+$choice = Animals::getChoice();
 
-try{ Animals::getName(3);    } catch (IncorrectValueException $e){}
-try{ $animals->addValues(3); } catch (IncorrectValueException $e){}
-
-try{ Animals::getValue('Wolf');  } catch (IncorrectNameException $e){}
-try{ $animals->addNames('Wolf'); } catch (IncorrectNameException $e){}
-
+try{ $choice->getName(3); } catch (IncorrectValueException $e){}
+try{ $choice->getValue('Wolf'); } catch (IncorrectNameException $e){}
 
 class Buttons extends SetAbstract{
-    const Cancel = 1;
-    const Accept = 1;
-    const Reject = 1;
+    public const Cancel = 1;
+    public const Accept = 1;
+    public const Reject = 1;
 }
-try{ Buttons::getNameVariants();        } catch (DuplicateValueException $e){}
-try{ Buttons::getValueVariants();       } catch (DuplicateValueException $e){}
-try{ Buttons::getName(Buttons::Cancel); } catch (DuplicateValueException $e){}
-try{ Buttons::getValue('Dog');          } catch (DuplicateValueException $e){}
-try{ new Buttons();                     } catch (DuplicateValueException $e){}
 
-
+try{ Buttons::getChoice(); } catch (DuplicateValueException $e){}
 ```
 
 # Run tests

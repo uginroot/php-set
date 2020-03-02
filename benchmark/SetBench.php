@@ -23,117 +23,162 @@ class SetBench
     /**
      * @throws ReflectionException
      */
-    public function init()
+    public function init():void
     {
         $this->animalFull       = new Animal(Animal::Wolf, Animal::Dog, Animal::Cat, Animal::Lion);
         $this->animalEmpty      = new Animal();
         $this->reflectionAnimal = new ReflectionClass($this->animalFull);
-        $this->animalNames      = $this->animalFull::getNameVariants();
-        $this->animalValues     = $this->animalFull::getValueVariants();
+        $this->animalNames      = Animal::getChoice()->getNames();
+        $this->animalValues     = Animal::getChoice()->getValues();
     }
 
-    public function benchGetNameVariants()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchGetNameVariants():void
     {
-        Animal::getNameVariants();
+        Animal::getChoice()->getNames();
     }
 
-    public function benchGetValueVariants()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchGetValueVariants():void
     {
-        Animal::getValueVariants();
+        Animal::getChoice()->getValues();
     }
 
-    public function benchGetValueName()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchGetValueName():void
     {
+        $choice = Animal::getChoice();
         foreach ($this->animalValues as $value) {
-            Animal::getName($value);
+            $choice->getName($value);
         }
     }
 
-    public function benchGetNameValue()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchGetNameValue():void
     {
+        $choice = Animal::getChoice();
         foreach ($this->animalNames as $name) {
-            Animal::getValue($name);
+            $choice->getValue($name);
         }
     }
 
-    public function benchConstructor()
+    public function benchConstructor():void
     {
         new Animal(Animal::Wolf, Animal::Dog, Animal::Cat, Animal::Lion);
     }
 
-    public function benchConstructorWithoutValues()
+    public function benchConstructorWithoutValues():void
     {
         new Animal;
     }
 
-    public function benchConstructorWithObject()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchConstructorWithObject():void
     {
         new Animal($this->animalFull);
     }
 
-    public function benchAddValue()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchAddValue():void
     {
         $this->animalEmpty->addValues($this->animalValues);
-        $this->animalEmpty->removeValues($this->animalValues);
     }
 
-    public function benchAddValueByName()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchAddValueByName():void
     {
         $this->animalEmpty->addNames($this->animalNames);
-        $this->animalEmpty->removeNames($this->animalNames);
     }
 
-    public function benchRemoveValue()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchRemoveValue():void
     {
         $this->animalFull->removeValues($this->animalValues);
-        $this->animalFull->addValues($this->animalValues);
 
     }
 
-    public function benchRemoveValueByName()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchRemoveValueByName():void
     {
-        $this->animalFull->addNames($this->animalNames);
         $this->animalFull->removeNames($this->animalNames);
     }
 
-    public function benchSetValues()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchSetValues():void
     {
         $this->animalEmpty->setValues(Animal::Lion, Animal::Cat, Animal::Dog, Animal::Wolf);
     }
 
-    public function benchGetNames()
+    public function benchGetNames():void
     {
         $this->animalFull->getNames();
     }
 
-    public function benchGetValues()
+    public function benchGetValues():void
     {
         $this->animalFull->getValues();
     }
 
-    public function benchIn()
+    /**
+     * @throws ReflectionException
+     * @throws ReflectionException
+     */
+    public function benchIn():void
     {
         $this->animalFull->in(Animal::Dog, Animal::Cat);
         $this->animalEmpty->in(Animal::Dog, Animal::Cat);
     }
 
-    public function benchIs()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchIs():void
     {
         $this->animalEmpty->is(Animal::Dog, Animal::Cat);
         $this->animalEmpty->is(Animal::Dog, Animal::Cat);
     }
-    
-    public function benchEqual()
+
+    /**
+     * @throws ReflectionException
+     */
+    public function benchEqual():void
     {
         $this->animalFull->is(Animal::Dog, Animal::Cat, Animal::Wolf, Animal::Lion);
         $this->animalFull->is(Animal::Dog, Animal::Cat);
     }
 
-    public function benchSetNames(){
+    /**
+     * @throws ReflectionException
+     */
+    public function benchSetNames():void
+    {
         $this->animalFull->setNames(...$this->animalNames);
     }
 
-    public function benchCreateFromNames()
+    /**
+     * @throws ReflectionException
+     */
+    public function benchCreateFromNames():void
     {
         Animal::createFromNames('Cat', 'Dog');
     }

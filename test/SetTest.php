@@ -5,45 +5,67 @@ namespace Uginroot\PhpSet\Test;
 
 
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
 use Uginroot\PhpSet\Test\Classes\Align;
 use Uginroot\PhpSet\Test\Classes\Animal;
 
 
 class SetTest extends TestCase
 {
-    public function testGetNameVariants()
+    /**
+     * @throws ReflectionException
+     */
+    public function testGetNameVariants():void
     {
-        $this->assertEqualsCanonicalizing(['Left', 'Center', 'Right'], Align::getNameVariants());
+        $this->assertEqualsCanonicalizing(['Left', 'Center', 'Right'], Align::getChoice()->getNames());
     }
 
-    public function testGetValueVariants()
+    /**
+     * @throws ReflectionException
+     */
+    public function testGetValueVariants():void
     {
-        $this->assertEqualsCanonicalizing([Align::Left, Align::Right, Align::Center], Align::getValueVariants());
+        $this->assertEqualsCanonicalizing([Align::Left, Align::Right, Align::Center], Align::getChoice()->getValues());
     }
 
-    public function testGetValueName()
+    /**
+     * @throws ReflectionException
+     */
+    public function testGetValueName():void
     {
-        $this->assertSame('Center', Align::getName(Align::Center));
+        $this->assertSame('Center', Align::getChoice()->getName(Align::Center));
     }
 
-    public function testGetNameValue()
+    /**
+     * @throws ReflectionException
+     */
+    public function testGetNameValue():void
     {
-        $this->assertSame('center', Align::getValue('Center'));
+        $this->assertSame('center', Align::getChoice()->getValue('Center'));
     }
 
-    public function testGetNames()
+    /**
+     * @throws ReflectionException
+     */
+    public function testGetNames():void
     {
         $align = new Align(Align::Left, Align::Right, Align::Center);
         $this->assertEqualsCanonicalizing(['Left', 'Right', 'Center'], $align->getNames());
     }
 
-    public function testGetValues()
+    /**
+     * @throws ReflectionException
+     */
+    public function testGetValues():void
     {
         $align = new Align(Align::Left, Align::Right, Align::Center);
         $this->assertEqualsCanonicalizing(['Left', 'Right', 'Center'], $align->getNames());
     }
 
-    public function testConstructor()
+    /**
+     * @throws ReflectionException
+     */
+    public function testConstructor():void
     {
         $align = new Align(Align::Left, Align::Right, Align::Center);
 
@@ -51,7 +73,10 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing(['Left', 'Right', 'Center'], $align->getNames());
     }
 
-    public function testConstructorWithoutValues()
+    /**
+     * @throws ReflectionException
+     */
+    public function testConstructorWithoutValues():void
     {
         $align = new Align;
 
@@ -59,7 +84,10 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing([], $align->getNames());
     }
 
-    public function testConstructorWithObject()
+    /**
+     * @throws ReflectionException
+     */
+    public function testConstructorWithObject():void
     {
         $left = new Align(Align::Left);
         $align = new Align($left, Align::Right);
@@ -68,7 +96,10 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing(['Right', 'Left'], $align->getNames());
     }
 
-    public function testAddValues()
+    /**
+     * @throws ReflectionException
+     */
+    public function testAddValues():void
     {
         $align = new Align;
         $newAlign = $align->addValues(Align::Center);
@@ -80,7 +111,10 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing([], $align->getNames());
     }
 
-    public function testRemoveValues()
+    /**
+     * @throws ReflectionException
+     */
+    public function testRemoveValues():void
     {
         $align = new Align(Align::Left, Align::Center);
         $newAlign = $align->removeValues(Align::Center);
@@ -92,7 +126,10 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing(['Left', 'Center'], $align->getNames());
     }
 
-    public function testSetValues()
+    /**
+     * @throws ReflectionException
+     */
+    public function testSetValues():void
     {
         $align = new Align;
         $newAlign = $align->setValues(Align::Left, Align::Right, Align::Center);
@@ -104,7 +141,10 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing([], $align->getNames());
     }
 
-    public function testAddNames()
+    /**
+     * @throws ReflectionException
+     */
+    public function testAddNames():void
     {
         $align = new Align;
         $newAlign = $align->addNames('Center');
@@ -116,7 +156,10 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing([], $align->getNames());
     }
 
-    public function testRemoveNames()
+    /**
+     * @throws ReflectionException
+     */
+    public function testRemoveNames():void
     {
         $align = new Align(Align::Left, Align::Center);
         $newAlign = $align->removeNames('Center');
@@ -128,9 +171,12 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing(['Left', 'Center'], $align->getNames());
     }
 
-    public function testIn()
+    /**
+     * @throws ReflectionException
+     */
+    public function testIn():void
     {
-        $animalsAll = new Animal(Animal::getValueVariants());
+        $animalsAll = new Animal(Animal::getChoice()->getValues());
 
         $animalsPets = new Animal(Animal::Dog, Animal::Cat);
         $animalsWild = new Animal(Animal::Wolf, Animal::Lion);
@@ -194,9 +240,12 @@ class SetTest extends TestCase
         $this->assertTrue($animalsDog->in($animalsPets));
     }
 
-    public function testIs()
+    /**
+     * @throws ReflectionException
+     */
+    public function testIs():void
     {
-        $animalsAll = new Animal(Animal::getValueVariants());
+        $animalsAll = new Animal(Animal::getChoice()->getValues());
 
         $animalsPets = new Animal(Animal::Dog, Animal::Cat);
         $animalsWild = new Animal(Animal::Wolf, Animal::Lion);
@@ -260,7 +309,10 @@ class SetTest extends TestCase
         $this->assertFalse($animalsDog->is($animalsPets));
     }
 
-    public function testEqual()
+    /**
+     * @throws ReflectionException
+     */
+    public function testEqual():void
     {
         $animalsPets = new Animal(Animal::Dog, Animal::Cat);
         $animalsWild = new Animal(Animal::Wolf, Animal::Lion);
@@ -278,7 +330,10 @@ class SetTest extends TestCase
         $this->assertFalse($animalsPets->equal($animalsDog));
     }
 
-    public function testSetNames()
+    /**
+     * @throws ReflectionException
+     */
+    public function testSetNames():void
     {
         $animalsPets = new Animal(Animal::Lion);
         $newAnimalsPets = $animalsPets->setNames('Cat', 'Dog');
@@ -287,9 +342,21 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing([Animal::Lion], $animalsPets->getValues());
     }
 
-    public function testCreateFromName()
+    /**
+     * @throws ReflectionException
+     */
+    public function testCreateFromNames():void
     {
         $animals = Animal::createFromNames('Cat', 'Dog');
+        $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animals->getValues());
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testCreateFromValues():void
+    {
+        $animals = Animal::createFromValues(Animal::Cat, Animal::Dog);
         $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animals->getValues());
     }
 }

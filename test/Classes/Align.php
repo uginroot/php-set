@@ -5,7 +5,7 @@ namespace Uginroot\PhpSet\Test\Classes;
 use Uginroot\PhpSet\SetAbstract;
 
 class Align extends SetAbstract {
-    const Left = 'left';
-    const Right = 'right';
-    const Center = 'center';
+    public const Left = 'left';
+    public const Right = 'right';
+    public const Center = 'center';
 }
