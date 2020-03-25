@@ -16,19 +16,10 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Uginroot\\PhpSet\\Test\\": "test",
-      "Uginroot\\PhpSet\\Benchmark\\": "benchmark"
+      "Uginroot\\PhpSet\\Test\\": "test"
     }
   },
   "require": {
     "php": "^7.4"
-  },
-  "scripts": {
-    "test" : [
-      "phpunit --bootstrap \"./vendor/autoload.php\" --testdox \"./test\""
-    ],
-    "benchmark" : [
-      "phpbench run --report=aggregate --revs 10000 --warmup 2 --progress=blinken"
-    ]
   }
 }
