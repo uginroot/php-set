@@ -81,13 +81,3 @@ class Buttons extends SetAbstract{
 
 try{ Buttons::getChoice(); } catch (DuplicateValueException $e){}
 ```
-
-# Run tests
-```bash
-composer test
-```
-
-# Run benchmark
-```bash
-composer benchmark
-```
