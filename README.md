@@ -6,6 +6,7 @@ composer require uginroot/php-set:^2.0
 # Usage
 ```php
 use Uginroot\PhpSet\SetAbstract;
+use Uginroot\PhpSet\Choice;
 
 class Animals extends SetAbstract{
     protected const Other = 0; // Is not considered
@@ -16,7 +17,7 @@ class Animals extends SetAbstract{
     public const Lion = 4;
 }
 
-// Static methods
+/** @var Choice $choice */
 $choice = Animals::getChoice();
 $choice->getNames(); // ['Dog', 'Cat', 'Wolf', 'Lion']
 $choice->getValues(); // [1, 2, 3, 4]
@@ -63,11 +64,14 @@ use Uginroot\PhpSet\SetAbstract;
 use Uginroot\PhpSet\Exception\DuplicateValueException;
 use Uginroot\PhpSet\Exception\IncorrectValueException;
 use Uginroot\PhpSet\Exception\IncorrectNameException;
+use Uginroot\PhpSet\Choice;
 
 class Animals extends SetAbstract{
     public const Dog = 1;
     public const Cat = 2;
 }
+
+/** @var Choice $choice */
 $choice = Animals::getChoice();
 
 try{ $choice->getName(3); } catch (IncorrectValueException $e){}
