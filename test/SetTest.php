@@ -12,6 +12,45 @@ use Uginroot\PhpSet\Test\Classes\Animal;
 
 class SetTest extends TestCase
 {
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testChoiceExtractorNames():void
+    {
+        $names = Align::getChoice()->extractorNames(
+            'Left',
+            [
+                'Center',
+                'Center',
+                [
+                    new Align(Align::Right)
+                ]
+            ]
+        );
+        sort($names);
+        $this->assertSame(['Center', 'Left', 'Right'], $names);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testChoiceExtractorValues():void
+    {
+        $values = Align::getChoice()->extractorValues(
+            Align::Left,
+            [
+                Align::Center,
+                Align::Center,
+                [
+                    new Align(Align::Right)
+                ]
+            ]
+        );
+        sort($values);
+        $this->assertSame(['center', 'left', 'right'], $values);
+    }
+
     /**
      * @throws ReflectionException
      */
