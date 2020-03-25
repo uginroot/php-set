@@ -11,7 +11,7 @@ class ChoiceCache
     /**
      * @var array|Choice[]
      */
-    private array $choices = [];
+    private $choices = [];
 
     /**
      * @param string $class

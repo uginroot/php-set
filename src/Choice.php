@@ -13,13 +13,13 @@ use Uginroot\PhpSet\Exception\DuplicateValueException;
 class Choice
 {
     /** @var string */
-    private string $class;
+    private $class;
 
     /** @var array|mixed[] */
-    private array $values = [];
+    private $values = [];
 
     /** @var array|string[] */
-    private array $names = [];
+    private $names = [];
 
     /**
      * SetConstants constructor.
@@ -119,6 +119,10 @@ class Choice
             if(is_iterable($name)){
                 foreach (static::generatorNames(...array_values($name)) as $subName){
                     yield $subName;
+                }
+            } elseif ($name instanceof SetAbstract) {
+                foreach ($name->getNames() as $item) {
+                    yield $item;
                 }
             } else {
                 yield $name;

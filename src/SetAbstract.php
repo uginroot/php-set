@@ -8,13 +8,13 @@ use ReflectionException;
 class SetAbstract
 {
     /** @var ChoiceCache|null */
-    private static ?ChoiceCache $choiceCache = null;
+    private static $choiceCache;
 
     /** @var array|mixed[] */
-    private array $values;
+    private $values;
 
     /** @var array|string[] */
-    private array $names;
+    private $names;
 
     /**
      * @return Choice
