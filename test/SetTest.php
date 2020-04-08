@@ -398,4 +398,16 @@ class SetTest extends TestCase
         $animals = Animal::createFromValues(Animal::Cat, Animal::Dog);
         $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animals->getValues());
     }
+
+    public function testEquals():void
+    {
+        $this->assertTrue(Animal::equals(null, null));
+        $this->assertFalse(Animal::equals(null, new Animal()));
+        $this->assertFalse(Animal::equals(new Animal(), null));
+        $this->assertTrue(Animal::equals(new Animal(), new Animal()));
+        $this->assertTrue(Animal::equals(new Animal(Animal::Wolf), new Animal(Animal::Wolf)));
+        $this->assertTrue(Animal::equals(new Animal(Animal::Wolf, Animal::Lion), new Animal(Animal::Lion, Animal::Wolf)));
+        $this->assertFalse(Animal::equals(new Animal(Animal::Wolf), new Animal(Animal::Lion)));
+        $this->assertFalse(Animal::equals(new Animal(Animal::Wolf, Animal::Dog), new Animal(Animal::Cat, Animal::Lion)));
+    }
 }

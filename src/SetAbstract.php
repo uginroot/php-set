@@ -16,6 +16,23 @@ class SetAbstract
     /** @var array|string[] */
     private $names;
 
+
+    public static function equals(?SetAbstract $a, ?SetAbstract $b): bool
+    {
+        if($a === $b){
+            return true;
+        }
+
+        if($a === null || $b === null){
+            return false;
+        }
+
+        $valuesIntersect = array_intersect($a->getValues(), $b->getValues());
+        $valuesDiff = array_diff($a->getValues(), $valuesIntersect);
+
+        return count($valuesDiff) === 0;
+    }
+
     /**
      * @return Choice
      * @throws ReflectionException
