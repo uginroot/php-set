@@ -1,6 +1,6 @@
 # Install
 ```bash
-composer require uginroot/php-set:^2.3
+composer require uginroot/php-set:^2.4
 ```
 
 # Usage
