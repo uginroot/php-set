@@ -5,7 +5,6 @@ namespace Uginroot\PhpSet;
 
 use Generator;
 use ReflectionClass;
-use ReflectionException;
 use Uginroot\PhpSet\Exception\IncorrectNameException;
 use Uginroot\PhpSet\Exception\IncorrectValueException;
 use Uginroot\PhpSet\Exception\DuplicateValueException;
@@ -21,11 +20,7 @@ class Choice
     /** @var array|string[] */
     private $names = [];
 
-    /**
-     * SetConstants constructor.
-     * @param string $class
-     * @throws ReflectionException
-     */
+
     public function __construct(string $class)
     {
         $this->class = $class;
@@ -45,9 +40,6 @@ class Choice
         }
     }
 
-    /**
-     * @return array|mixed[]
-     */
     public function getValues():array
     {
         return $this->values;
@@ -61,10 +53,6 @@ class Choice
         return $this->names;
     }
 
-    /**
-     * @param $value
-     * @return int
-     */
     private function getValueIndex($value):int
     {
         $index = array_search($value, $this->values, true);
@@ -76,10 +64,6 @@ class Choice
         return $index;
     }
 
-    /**
-     * @param string $name
-     * @return int
-     */
     private function getNameIndex(string $name):int
     {
         $index = array_search($name, $this->names, true);
@@ -91,27 +75,19 @@ class Choice
         return $index;
     }
 
-    /**
-     * @param $value
-     * @return string
-     */
     public function getName($value):string
     {
         return $this->names[$this->getValueIndex($value)];
     }
 
-    /**
-     * @param string $name
-     * @return mixed
-     */
     public function getValue(string $name)
     {
         return $this->values[$this->getNameIndex($name)];
     }
 
     /**
-     * @param mixed ...$names
-     * @return Generator
+     * @param array $names
+     * @return Generator|string[]
      */
     private function generatorNames(...$names):Generator
     {
@@ -143,10 +119,6 @@ class Choice
         return $namesUnique;
     }
 
-    /**
-     * @param mixed[] $values
-     * @return Generator
-     */
     private function generatorValues(...$values):Generator
     {
         foreach ($values as $value){
@@ -164,10 +136,6 @@ class Choice
         }
     }
 
-    /**
-     * @param mixed ...$values
-     * @return array
-     */
     public function extractorValues(...$values):array
     {
         $valuesUnique = array_unique(iterator_to_array($this->generatorValues(...$values)));
@@ -191,10 +159,6 @@ class Choice
         return $names;
     }
 
-    /**
-     * @param mixed ...$names
-     * @return array
-     */
     public function findValues(...$names):array
     {
         $namesUnique = array_unique(iterator_to_array($this->generatorNames(...$names)));
