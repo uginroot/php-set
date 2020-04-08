@@ -42,6 +42,8 @@ $animalsPets->equal(Animals::Dog, Animals::Cat); // true
 $animalsPets->equal(Animals::Cat);               // false
 $animalsPets->equal($animalsPetsNames);          // true
 
+Animals::equals(new Animals(Animals::Wolf), new Animals(Animals::Wolf)); // true
+
 // Current names|values
 $animalsPets->getValues(); // [1, 2]
 $animalsPets->getNames();  // ['Dog', 'Cat']
