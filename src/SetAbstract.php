@@ -25,6 +25,10 @@ class SetAbstract
             return false;
         }
 
+        if(get_class($a) !== get_class($b)){
+            return false;
+        }
+
         $valuesIntersect = array_intersect($a->getValues(), $b->getValues());
         $valuesDiff = array_diff($a->getValues(), $valuesIntersect);
 
