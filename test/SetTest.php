@@ -341,5 +341,7 @@ class SetTest extends TestCase
         $this->assertTrue(Animal::equals(new Animal(Animal::Wolf, Animal::Lion), new Animal(Animal::Lion, Animal::Wolf)));
         $this->assertFalse(Animal::equals(new Animal(Animal::Wolf), new Animal(Animal::Lion)));
         $this->assertFalse(Animal::equals(new Animal(Animal::Wolf, Animal::Dog), new Animal(Animal::Cat, Animal::Lion)));
+        $this->assertFalse(Animal::equals(new Animal(Animal::Wolf), new Animal(Animal::Wolf, Animal::Lion)));
+        $this->assertFalse(Animal::equals(new Animal(Animal::Wolf, Animal::Lion), new Animal(Animal::Wolf)));
     }
 }

@@ -29,10 +29,7 @@ class SetAbstract
             return false;
         }
 
-        $valuesIntersect = array_intersect($a->getValues(), $b->getValues());
-        $valuesDiff = array_diff($a->getValues(), $valuesIntersect);
-
-        return count($valuesDiff) === 0;
+        return $a->equal($b);
     }
 
     public static function getChoice():Choice
