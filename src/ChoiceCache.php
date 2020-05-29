@@ -18,4 +18,11 @@ class ChoiceCache
 
         return $this->choices[$class];
     }
+
+    public function initChoice(string $class): void
+    {
+        if(!array_key_exists($class, $this->choices)){
+            $this->choices[$class] = new Choice($class);
+        }
+    }
 }

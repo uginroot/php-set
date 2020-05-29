@@ -41,20 +41,57 @@ class SetAbstract
         return self::$choiceCache->getChoice(static::class);
     }
 
+    /**
+     * @deprecated Use SetAbstract::constructorFromNames()
+     */
     public static function createFromNames(...$names): self
     {
         return new static(static::getChoice()->findValues($names));
     }
 
+    /**
+     * @deprecated Use SetAbstract::constructorFromValues()
+     */
     public static function createFromValues(...$values): self
     {
         return new static($values);
     }
 
+    public static function constructorFromNames(array $names = []): self
+    {
+        self::$choiceCache->initChoice(static::class);
+        $self = new static();
+
+        foreach ($names as $name){
+            $self->values[] = constant(static::class . '::' . $name);
+            $self->names[] = $name;
+        }
+
+        return $self;
+    }
+
+    public static function constructorFromValues(array $values = []): self
+    {
+        $choice = self::$choiceCache->getChoice(static::class);
+        $self = new static();
+
+        foreach ($values as $value){
+            $self->values[] = $value;
+            $self->names[] = $choice->getName($value);
+        }
+
+        return $self;
+    }
+
     public function __construct(...$values)
     {
-        $this->values = static::getChoice()->extractorValues($values);
-        $this->names = static::getChoice()->findNames($this->values);
+        if(count($values) === 0){
+            $this->values = [];
+            $this->names = [];
+        } else {
+            $this->values = static::getChoice()->extractorValues($values);
+            $this->names = static::getChoice()->findNames($this->values);
+        }
     }
 
     public function addValues(...$values): self

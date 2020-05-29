@@ -325,9 +325,21 @@ class SetTest extends TestCase
         $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animals->getValues());
     }
 
+    public function testConstructorFromNames():void
+    {
+        $animals = Animal::constructorFromNames(['Cat', 'Dog']);
+        $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animals->getValues());
+    }
+
     public function testCreateFromValues():void
     {
         $animals = Animal::createFromValues(Animal::Cat, Animal::Dog);
+        $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animals->getValues());
+    }
+
+    public function testConstructorFromValues():void
+    {
+        $animals = Animal::constructorFromValues([Animal::Cat, Animal::Dog]);
         $this->assertEqualsCanonicalizing([Animal::Cat, Animal::Dog], $animals->getValues());
     }
 

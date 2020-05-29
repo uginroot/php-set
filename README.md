@@ -1,6 +1,6 @@
 # Install
 ```bash
-composer require uginroot/php-set:^2.4
+composer require uginroot/php-set:^2.5
 ```
 
 # Usage
@@ -28,8 +28,8 @@ $choice->findValues('Dog', 'Wolf'); // [1, 3]
 $choice->extractorValues(1, 3); // [1, 3]
 $choice->extractorNames('Dog', 'Wolf'); // ['Dog', 'Wolf']
 
-$animalsPets = new Animals(Animals::Dog, Animals::Cat);
-$animalsPetsNames = Animals::createFromNames('Dog', 'Cat');
+$animalsPets = Animals::constructorFromValues([Animals::Dog, Animals::Cat]);
+$animalsPetsNames = Animals::constructorFromNames(['Dog', 'Cat']);
 
 // Compare
 $animalsPets->in(Animals::Dog);                  // true
@@ -42,7 +42,10 @@ $animalsPets->equal(Animals::Dog, Animals::Cat); // true
 $animalsPets->equal(Animals::Cat);               // false
 $animalsPets->equal($animalsPetsNames);          // true
 
-Animals::equals(new Animals(Animals::Wolf), new Animals(Animals::Wolf)); // true
+Animals::equals(
+    Animals::constructorFromValues([Animals::Wolf]),
+    Animals::constructorFromValues([Animals::Wolf])
+); // true
 
 // Current names|values
 $animalsPets->getValues(); // [1, 2]
