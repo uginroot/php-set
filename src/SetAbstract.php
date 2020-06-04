@@ -41,6 +41,14 @@ class SetAbstract
         return self::$choiceCache->getChoice(static::class);
     }
 
+    public static function initChoice(): void
+    {
+        if(self::$choiceCache === null){
+            self::$choiceCache = new ChoiceCache();
+        }
+        self::$choiceCache->initChoice(static::class);
+    }
+
     /**
      * @deprecated Use SetAbstract::constructorFromNames()
      */
@@ -59,7 +67,7 @@ class SetAbstract
 
     public static function constructorFromNames(array $names = []): self
     {
-        self::$choiceCache->initChoice(static::class);
+        self::initChoice();
         $self = new static();
 
         foreach ($names as $name){
@@ -72,7 +80,7 @@ class SetAbstract
 
     public static function constructorFromValues(array $values = []): self
     {
-        $choice = self::$choiceCache->getChoice(static::class);
+        $choice = self::getChoice();
         $self = new static();
 
         foreach ($values as $value){
